@@ -9,7 +9,8 @@ pub struct BwtResult {
 impl BwtResult {
     pub fn from_text(text: &[u8]) -> Self {
         let n = text.len();
-        let sa = SuffixArray::build(text);
+        let mut sa = vec![0u32; n];
+        SuffixArray::build(text, &mut sa, n);
         let mut bwt = vec![0u8; n];
         for i in 0..n {
             let sai = sa[i] as usize;
